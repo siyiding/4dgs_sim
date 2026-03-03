@@ -1,0 +1,47 @@
+# 动态场景训练配置
+
+data:
+  dataset_type: kitti
+  data_root: ./data/kitti
+  scene_id: "0001"
+  image_size: [1024, 768]
+  num_workers: 4
+
+model:
+  num_gaussians: 150000
+  sh_degree: 3
+  use_4d: true
+
+deformation:
+  hidden_dim: 128
+  num_layers: 4
+  use_time_encoding: true
+
+render:
+  background_color: [0, 0, 0]
+
+training:
+  num_epochs: 150
+  batch_size: 1
+  
+  # 学习率
+  lr_xyz: 0.00016
+  lr_rotation: 0.001
+  lr_scaling: 0.005
+  lr_opacity: 0.05
+  lr_features: 0.0025
+  lr_deformation: 0.0001
+  
+  # 损失权重
+  lambda_l1: 0.8
+  lambda_mse: 0.2
+  lambda_temporal: 0.1
+  
+  # 自适应密度控制
+  densify_interval: 100
+  densify_grad_threshold: 0.0002
+  prune_opacity_threshold: 0.005
+  
+  # 保存
+  output_dir: ./outputs/dynamic
+  save_interval: 10
