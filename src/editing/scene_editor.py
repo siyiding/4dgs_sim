@@ -140,7 +140,7 @@ class SceneEditor:
         
         # 计算旋转中心
         if center is None:
-            center = self.model.xyz[self.selection_mask].mean(dim=0).cpu().numpy()
+            center = self.model.xyz[self.selection_mask].mean(dim=0).detach().cpu().numpy()
         
         # 构建旋转矩阵（Rodrigues 公式）
         axis = axis / np.linalg.norm(axis)
@@ -181,7 +181,7 @@ class SceneEditor:
         
         # 计算缩放中心
         if center is None:
-            center = self.model.xyz[self.selection_mask].mean(dim=0).cpu().numpy()
+            center = self.model.xyz[self.selection_mask].mean(dim=0).detach().cpu().numpy()
         
         # 应用缩放
         xyz = self.model.xyz[self.selection_mask].detach().cpu().numpy()
